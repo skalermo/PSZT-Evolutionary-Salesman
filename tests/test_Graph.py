@@ -20,6 +20,17 @@ class GraphTest(unittest.TestCase):
 
         self.assertEqual(3, len(self.g.vertices()))
 
+    def test_iter(self):
+        self.g.addEdge('a', 'd', 2)
+        self.g.addEdge('b', 'c', 3)
+        self.g.addEdge('a', 'b', 5)
+        self.g.addEdge('a', 'b', 3)
+
+        self.assertTrue(('a', 'd', 2) in self.g)
+        self.assertTrue(('b', 'c', 3) in self.g)
+        self.assertFalse(('a', 'b', 3) in self.g)
+        self.assertEqual(3, len(list(self.g))//2)
+
 
 if __name__ == '__main__':
     unittest.main()
