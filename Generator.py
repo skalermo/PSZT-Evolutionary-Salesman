@@ -1,6 +1,6 @@
 from time import time
 import random
-from numpy.random import binomial
+import numpy as np
 
 
 import Graph
@@ -34,7 +34,7 @@ to the number of edges in a N complete graph
         edgesWithoutCosts = [(citiesNameList[i], citiesNameList[j]) for i, j in edgesWithoutCosts]
 
     # Calculate costs from integer normal distribution
-    costs = list(binomial(costMedian, costDeviation, edgeCountToGenerate))
+    costs = list(np.random.normal(costMedian, costDeviation, edgeCountToGenerate).round().astype(np.int))
 
     for edge, cost in zip(edgesWithoutCosts, costs):
         g.addEdge(edge[0], edge[1], cost)
