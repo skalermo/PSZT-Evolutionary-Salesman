@@ -10,9 +10,14 @@ class GeneratorTest(unittest.TestCase):
         self.assertEqual(edgeCount, len(list(g))//2)
 
     def test_costs(self):
-        g = genGraph(vertexCount=1000, density=0.85, costMedian=1000, costDeviation=0.3)
-
+        vc = 1000
+        d = 0.85
+        g = genGraph(vertexCount=vc, density=d, costMedian=1000, costDeviation=100)
         self.assertTrue(all(edge[2] > 0 for edge in g))
+        edgesInRange = sum(900 < edge[2] < 1100 for edge in g)
+        edgeCountComplete = vc * (vc - 1) // 2
+        edgeCount = int(edgeCountComplete * d)
+        self.assertTrue(edgesInRange > edgeCount * 0.97)
 
 
 if __name__ == '__main__':
