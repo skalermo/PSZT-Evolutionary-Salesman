@@ -6,7 +6,7 @@ import numpy as np
 import Graph
 
 
-def genGraph(vertexCount, density, costMedian=100, costDeviation=0.5, citiesNameList=None, seed=time()):
+def genGraph(vertexCount, density, costMedian=100, costDeviation=10, citiesNameList=None, seed=time()):
     """Generate weighted graph based on parameters
     :param vertexCount Number of vertices to generate
     :param density Ratio of number of edges in the graph

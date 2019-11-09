@@ -19,6 +19,20 @@ class GeneratorTest(unittest.TestCase):
         edgeCount = int(edgeCountComplete * d)
         self.assertTrue(edgesInRange > edgeCount * 0.97)
 
+    def test_addCitiesNames(self):
+        citiesList = ['Billings',
+                      'Boise',
+                      'Boston',
+                      'Boulder',
+                      'Bridgeport',
+                      'Brownsville',
+                      'Buffalo',
+                      'Burbank',
+                      'New York',
+                      'Columbus']
+        g = genGraph(vertexCount=10, density=0.5, citiesNameList=citiesList)
+        self.assertTrue(all(city in g.vertices() for city in citiesList))
+
 
 if __name__ == '__main__':
     unittest.main()
