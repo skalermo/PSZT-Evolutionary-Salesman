@@ -54,11 +54,11 @@ def selection(ranked, eliteSize, selectionSize=0.5):
     # Filter out -1 fitness
     # ranked = [x for x in ranked if x[1] > 0]
 
-    selection = []
+    selected = []
 
     # Choose elite
     for i in range(eliteSize):
-        selection.append(ranked[i][0])
+        selected.append(ranked[i][0])
 
     # Prepare probabilities for roulette wheel selection
     fitnessList = [fit for idx, fit in ranked[eliteSize:]]
@@ -72,7 +72,16 @@ def selection(ranked, eliteSize, selectionSize=0.5):
 
         for i in range(eliteSize, len(ranked)):
             if pick <= fitnessProbability[i]:
-                selection.append(ranked[i][0])
+                selected.append(ranked[i][0])
                 break
 
-    return selection
+    return selected
+
+
+def matingPool(population, selectionResults):
+    pool = []
+
+    for index in selectionResults:
+        pool.append(population[index])
+
+    return pool
