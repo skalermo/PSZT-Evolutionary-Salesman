@@ -48,6 +48,7 @@ def rankPaths(graph, population):
 
 
 def selection(ranked, eliteSize, selectionSize=0.5):
+    """Select parents for next generation using Elitism and Roulette Wheel Selection"""
     if not 0 < selectionSize <= 1:
         raise Exception('Selection size must be in [0 .. 1]')
 
@@ -79,6 +80,7 @@ def selection(ranked, eliteSize, selectionSize=0.5):
 
 
 def matingPool(population, selectionResults):
+    """Extract population from selectionResults"""
     pool = []
 
     for index in selectionResults:
