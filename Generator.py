@@ -37,7 +37,7 @@ to the number of edges in a N complete graph
     costs = list(np.random.normal(costMedian, costDeviation, edgeCountToGenerate).round().astype(np.int))
 
     for edge, cost in zip(edgesWithoutCosts, costs):
-        g.addEdge(edge[0], edge[1], cost)
+        g.addEdge(edge[0], edge[1], cost if cost > 1 else 1)
 
     return g
 

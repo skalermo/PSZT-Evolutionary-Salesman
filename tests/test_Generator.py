@@ -19,6 +19,13 @@ class GeneratorTest(unittest.TestCase):
         edgeCount = int(edgeCountComplete * d)
         self.assertTrue(edgesInRange > edgeCount * 0.97)
 
+    def test_negativeCosts(self):
+        vc = 1000
+        d = 1.0
+        g = genGraph(vertexCount=vc, density=d, costMedian=1, costDeviation=1000)
+
+        self.assertFalse(any(edge[2] < 1 for edge in g))
+
     def test_addCitiesNames(self):
         citiesList = ['Billings',
                       'Boise',
