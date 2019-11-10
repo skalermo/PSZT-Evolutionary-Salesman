@@ -22,6 +22,13 @@ self.graph = {
 }
 ```
 
+### Generowanie grafu
+
+Do generowania grafów służy specjalna funkcja ```genGraph()```.
+Pozwala ona na swtorzenie grafu o zadanej liczbie wierzchołków i gęstości.
+Koszty krawędzi są wyliczane na podstawie rozkładu normalnego. Także możliwe jest
+przypisanie wierzchołkom grafu specjalnych nazw podając do funkcji listę stringów.
+
 ### Populacja
 
 Populacja to lista ścieżek przez wszystkie miasta.
