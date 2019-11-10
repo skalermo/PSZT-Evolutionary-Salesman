@@ -10,6 +10,14 @@ class WeightedGraph:
     def __repr__(self):
         return str(self.graph)
 
+    def __getitem__(self, key):
+        # key = (v1, v2,)
+        v1, v2 = key
+        if v1 in self.graph:
+            if v2 in self.graph[v1]:
+                return self.graph[v1][v2]
+        return None
+
     def addVertex(self, v):
         if v not in self.graph:
             self.graph[v] = {}

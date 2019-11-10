@@ -29,6 +29,18 @@ Pozwala ona na swtorzenie grafu o zadanej liczbie wierzchołków i gęstości.
 Koszty krawędzi są wyliczane na podstawie rozkładu normalnego. Także możliwe jest
 przypisanie wierzchołkom grafu specjalnych nazw podając do funkcji listę stringów.
 
+### Osobnik
+
+Osobniki są reprezentowane przez cykle przechodzące
+przez wszystkie wierzchołki (cykle Hamiltona). 
+
 ### Populacja
 
-Populacja to lista ścieżek przez wszystkie miasta.
+Populacja to lista cykli przez wszystkie miasta.
+
+### Funkcja przystosowania
+
+Funkcja oceny czy też przystosowania dla każdego osobnika tj. cyklu jest obliczana
+na podstawie odwrotnej proporcjonalności do jego długości (kosztu).
+W przypadku gdy dany osobnik nie jest cyklem Hamiltona funkcja oceny zwraca
+-1 co odpowiada minimalnej wartości funkcji przystosowania.
