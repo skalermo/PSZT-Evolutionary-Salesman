@@ -20,6 +20,13 @@ class GraphTest(unittest.TestCase):
 
         self.assertEqual(3, len(self.g.vertices()))
 
+    def test_getItem(self):
+        self.g.addEdge('a', 'b', 1000)
+        self.g.addEdge('x', 'y', 2)
+        self.assertEqual(1000, self.g[('a', 'b')])
+        self.assertEqual(2, self.g['x', 'y'])
+        self.assertEqual(None, self.g['a', 'x'])
+
 
 if __name__ == '__main__':
     unittest.main()
