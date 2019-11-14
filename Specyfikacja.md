@@ -44,3 +44,9 @@ Funkcja oceny czy też przystosowania dla każdego osobnika tj. cyklu jest oblic
 na podstawie odwrotnej proporcjonalności do jego długości (kosztu).
 W przypadku gdy dany osobnik nie jest cyklem Hamiltona funkcja oceny zwraca
 -1 co odpowiada minimalnej wartości funkcji przystosowania.
+
+### Selekcja
+
+Sposobami wyboru osobników jest strategia elitarna oraz metoda koła ruletki.
+Najpierw jest wybierane kilka osobników, którzy przejdą do procesu reprodukcji.
+Następnie pozostałe osobniki wybierani są metodą koła ruletki.
