@@ -1,5 +1,7 @@
 import unittest
 import random
+
+from Generator import genGraph
 from Graph import WeightedGraph
 import AiUtils
 
@@ -28,17 +30,30 @@ class AiUtilsTest(unittest.TestCase):
         self.g.addEdge('a', 'b', 10)
         self.g.addEdge('c', 'a', 3)
 
-        path = random.sample(self.g.vertices(), len(self.g.vertices()))
+        path = AiUtils.genPath(self.g.vertices())
         fitness = AiUtils.calcFitness(self.g, path)
         self.assertEqual(-1, fitness)
 
         self.g.addEdge('b', 'c', 5)
-        path = random.sample(self.g.vertices(), len(self.g.vertices()))
+        path = AiUtils.genPath(self.g.vertices())
         fitness = AiUtils.calcFitness(self.g, path)
         self.assertTrue(fitness == 1.0/18)
 
     def test_rankPaths(self):
         self.fail()
+
+    def test_selection(self):
+        self.g = genGraph(100, 1)
+
+        population = AiUtils.initPopulation(100, self.g.vertices())
+        ranked = AiUtils.rankPaths(self.g, population)
+
+        with self.assertRaises(Exception) as context:
+            AiUtils.selection(ranked, 30, selectionSize=1.1)
+
+            self.assertTrue('Selection size must be in [0 .. 1]' in context.exception)
+
+
 
 
 if __name__ == '__main__':
