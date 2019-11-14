@@ -62,7 +62,7 @@ def selection(ranked, eliteSize, selectionSize=0.5):
         selected.append(ranked[i][0])
 
     # Prepare probabilities for roulette wheel selection
-    fitnessList = [fit for idx, fit in ranked[eliteSize:]]
+    fitnessList = [fit for _, fit in ranked[eliteSize:]]
     fitnessCumSum = np.cumsum(fitnessList)
     fitnessSum = np.sum(fitnessList)
     fitnessProbability = [fit / fitnessSum for fit in fitnessCumSum]
