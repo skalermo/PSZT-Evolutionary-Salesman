@@ -134,3 +134,19 @@ def breedPopulation(matingPool, eliteSize):
 
     return children
 
+
+def mutateIndividual(individual, mutationRate):
+    """Mutate one selected individual"""
+
+    for i in range(len(individual)):
+        if random.random() < mutationRate:
+            # Index of gene to swap
+            j = random.randint(0, len(individual))
+
+            # Swap
+            individual[i], individual[j] = individual[j], individual[i]
+
+    return individual
+
+
+
