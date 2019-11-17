@@ -1,9 +1,9 @@
-from random import sample, random, shuffle
+import random
 import numpy as np
 
 
 def genPath(cityList):
-    return sample(cityList, len(cityList))
+    return random.sample(cityList, len(cityList))
 
 
 def initPopulation(populationSize, cityList):
@@ -69,7 +69,7 @@ def selection(ranked, eliteSize, selectionSize=0.5):
 
     # Roulette wheel selection
     for x in range(int(len(ranked)*selectionSize) - eliteSize):
-        pick = random()
+        pick = random.random()
 
         for i in range(eliteSize, len(ranked)):
             if pick <= fitnessProbability[i]:
@@ -94,8 +94,8 @@ def breed(parent1, parent2):
 
     # randomly select the consecutive genes (chain)
     # by picking the first and last genes
-    geneA = int(random() * len(parent1))
-    geneB = int(random() * len(parent1))
+    geneA = int(random.random() * len(parent1))
+    geneB = int(random.random() * len(parent1))
 
     startGene = min(geneA, geneB)
     endGene = max(geneA, geneB)
@@ -125,7 +125,7 @@ def breedPopulation(matingPool, eliteSize):
         children.append(matingPool[i])
 
     # shuffle mating pool
-    shuffle(matingPool)
+    random.shuffle(matingPool)
 
     # breed new and add them to children
     for i in range(0, len(matingPool)):
@@ -133,3 +133,4 @@ def breedPopulation(matingPool, eliteSize):
         children.extend(bornChildren)
 
     return children
+
