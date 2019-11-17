@@ -73,6 +73,14 @@ class AiUtilsTest(unittest.TestCase):
         self.assertTrue(len(child1) == len(set(child1)))
         self.assertTrue(len(child2) == len(set(child2)))
 
+    def test_mutate(self):
+        self.g = genGraph(10, 1)
+        population = AiUtils.initPopulation(100, self.g.vertices())
+
+        mutated = AiUtils.mutatePopulation(population, 1, 1)
+
+        self.assertTrue(all(x not in population for x in mutated))
+
 
 if __name__ == '__main__':
     unittest.main()

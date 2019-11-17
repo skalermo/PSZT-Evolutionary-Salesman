@@ -89,3 +89,8 @@ Przykład:
     
         **3 1 6 2 4 5**
         
+        
+### Mutacja
+
+Funkcja mutująca wybiera osobniki z populacji do zmutowania. Następnie dla każdego wybranego osobnika
+funkcja mutuje osobnik zamieniając geny miejscami.
