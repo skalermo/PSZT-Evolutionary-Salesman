@@ -59,7 +59,19 @@ class AiUtilsTest(unittest.TestCase):
 
             self.assertTrue('Selection size must be in [0 .. 1]' in context.exception)
 
+    def test_breed(self):
+        parent1 = list(range(10))
+        parent2 = parent1[:]
+        random.shuffle(parent2)
 
+        self.assertTrue(len(parent1) == len(parent2))
+
+        child1, child2 = AiUtils.breed(parent1, parent2)
+
+        self.assertTrue(len(child1) == len(child2))
+        self.assertTrue(len(child1) == len(parent1))
+        self.assertTrue(len(child1) == len(set(child1)))
+        self.assertTrue(len(child2) == len(set(child2)))
 
 
 if __name__ == '__main__':

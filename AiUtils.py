@@ -1,4 +1,4 @@
-from random import sample, random
+from random import sample, random, shuffle
 import numpy as np
 
 
@@ -87,3 +87,49 @@ def matingPool(population, selectionResults):
         pool.append(population[index])
 
     return pool
+
+
+def breed(parent1, parent2):
+    """Give birth to 2 children based on material from the parents"""
+
+    # randomly select the consecutive genes (chain)
+    # by picking the first and last genes
+    geneA = int(random() * len(parent1))
+    geneB = int(random() * len(parent1))
+
+    startGene = min(geneA, geneB)
+    endGene = max(geneA, geneB)
+
+    # create chains of selected genes for 2 children
+    chain1 = []
+    chain2 = []
+    for i in range(startGene, endGene+1):
+        chain1.append(parent1[i])
+        chain2.append(parent2[i])
+
+    # fill the remaining empty slots with genes from another parent
+    child1 = chain1 + [gene for gene in parent2 if gene not in chain1]
+    child2 = chain2 + [gene for gene in parent1 if gene not in chain2]
+
+    return child1, child2
+
+
+def breedPopulation(matingPool, eliteSize):
+    """Produce children from elite and by breeding
+    matingPool is changed by this function !"""
+
+    children = []
+
+    # add elite to children
+    for i in range(0, eliteSize):
+        children.append(matingPool[i])
+
+    # shuffle mating pool
+    shuffle(matingPool)
+
+    # breed new and add them to children
+    for i in range(0, len(matingPool)):
+        bornChildren = breed(matingPool[i], matingPool[-i-1])
+        children.extend(bornChildren)
+
+    return children

@@ -50,3 +50,42 @@ W przypadku gdy dany osobnik nie jest cyklem Hamiltona funkcja oceny zwraca
 Sposobami wyboru osobników jest strategia elitarna oraz metoda koła ruletki.
 Najpierw jest wybierane kilka osobników, którzy przejdą do procesu reprodukcji.
 Następnie pozostałe osobniki wybierani są metodą koła ruletki.
+
+### Krzyżowanie
+
+Odbywa się w następujący sposób:
+Losowo wybieramy indeks początkowy i końcowy, które określają sekwencje genów w każdym
+z rodziców. Każde dziecko będzie zawierało tą sekwencje od jednego rodzica oraz geny 
+drugiego rodzica, które nie występują w tej sekwencji.
+
+Przykład:
+
+- *Pierwszy rodzic* 
+    - 1 2 3 4 5 6
+
+- *Drugi rodzic* 
+    - 2 4 3 1 6 5
+
+- Wylosowane indeksy: 3 i 5
+
+- Wybrane sekwencje:
+
+    *Pierwszy rodzic*     
+    - 1 2 **3 4 5** 6
+    
+    *Drugi rodzic*     
+    - 2 4 **3 1 6** 5
+    
+- *Piersze dziecko*
+
+    - Sekwencja piewszego rodzica 3 4 5 oraz geny drugiego rodzica które nie występują
+    w tej sekwencji czyli 2 1 6: 
+        
+        **3 4 5 2 1 6**
+        
+- *Drugie dziecko*
+
+    - Analogicznie do pierwszego:
+    
+        **3 1 6 2 4 5**
+        
