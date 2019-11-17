@@ -6,7 +6,7 @@ import numpy as np
 import Graph
 
 
-def genGraph(vertexCount, density, costMedian=100, costDeviation=10, citiesNameList=None, seed=time()):
+def genGraph(vertexCount, density, costMedian=100, costDeviation=10, citiesNameList=None, seed=None):
     """Generate weighted graph based on parameters
     :param vertexCount Number of vertices to generate
     :param density Ratio of number of edges in the graph
@@ -17,6 +17,11 @@ to the number of edges in a N complete graph
     :param seed For numpy random
     :return Generated graph"""
 
+    if seed is None:
+        seed = time()
+    random.seed(seed)
+    np.random.seed(int(seed))
+
     g = Graph.WeightedGraph()
 
     # Calculate number of edges to generate based on density
@@ -24,8 +29,6 @@ to the number of edges in a N complete graph
     edgeCountToGenerate = int(edgeCountComplete * density)
 
     # Pick random edges
-    random.seed(seed)
-
     edgesWithoutCosts = random.sample([(i, j,) for i in range(vertexCount - 1)
                                        for j in range(i + 1, vertexCount)], edgeCountToGenerate)
 
