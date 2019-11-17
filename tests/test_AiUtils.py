@@ -40,7 +40,13 @@ class AiUtilsTest(unittest.TestCase):
         self.assertTrue(fitness == 1.0/18)
 
     def test_rankPaths(self):
-        self.fail()
+        self.g = genGraph(100, 0.9)
+
+        population = AiUtils.initPopulation(50, self.g.vertices())
+        ranked = AiUtils.rankPaths(self.g, population)
+        self.assertEqual(50, len(ranked))
+        for _, fitness in ranked:
+            self.assertTrue(fitness > 0 or fitness == -1)
 
     def test_selection(self):
         self.g = genGraph(100, 1)
