@@ -138,19 +138,22 @@ def breedPopulation(matingPool, eliteSize):
 def mutateIndividual(individual, mutationRate):
     """Mutate one selected individual"""
 
+    # Clone list
+    mutated = list(individual)
+
     for i in range(len(individual)):
         if random.random() < mutationRate:
             # Index of gene to swap
-            j = random.randint(0, len(individual))
+            j = random.randint(0, len(individual) - 1)
 
             # Swap
-            individual[i], individual[j] = individual[j], individual[i]
+            mutated[i], mutated[j] = individual[j], individual[i]
 
-    return individual
+    return mutated
 
 
 def mutatePopulation(population, selectionRate, mutationRate):
-    mutatedPopulation = population
+    mutatedPopulation = list(population)
 
     for i in range(len(population)):
         if random.random() < selectionRate:
