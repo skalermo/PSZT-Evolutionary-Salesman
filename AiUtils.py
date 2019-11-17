@@ -149,4 +149,11 @@ def mutateIndividual(individual, mutationRate):
     return individual
 
 
+def mutatePopulation(population, selectionRate, mutationRate):
+    mutatedPopulation = population
 
+    for i in range(len(population)):
+        if random.random() < selectionRate:
+            population[i] = mutateIndividual(population[i], mutationRate)
+
+    return mutatedPopulation
