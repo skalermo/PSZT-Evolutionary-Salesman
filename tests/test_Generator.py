@@ -40,6 +40,19 @@ class GeneratorTest(unittest.TestCase):
         g = genGraph(vertexCount=10, density=0.5, citiesNameList=citiesList)
         self.assertTrue(all(city in g.vertices() for city in citiesList))
 
+    def test_genDifferentGraphs(self):
+        g = genGraph(vertexCount=100, density=0.6)
+        f = genGraph(vertexCount=100, density=0.6)
+        self.assertFalse(g.graph == f.graph)
+
+    def test_seed(self):
+        g = genGraph(vertexCount=100, density=0.6, seed=1)
+        f = genGraph(vertexCount=100, density=0.6, seed=1)
+        self.assertTrue(g.graph == f.graph)
+
+        h = genGraph(vertexCount=100, density=0.6, seed=2)
+        self.assertFalse(g.graph == h.graph)
+
 
 if __name__ == '__main__':
     unittest.main()
