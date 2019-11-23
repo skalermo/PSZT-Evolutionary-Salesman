@@ -61,8 +61,9 @@ class AiUtilsTest(unittest.TestCase):
 
     def test_breed(self):
         parent1 = list(range(10))
-        parent2 = parent1[:]
+        parent2 = parent1[1:]
         random.shuffle(parent2)
+        parent2 = [parent1[0]] + parent2
 
         self.assertTrue(len(parent1) == len(parent2))
 
