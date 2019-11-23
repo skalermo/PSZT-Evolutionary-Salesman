@@ -160,3 +160,24 @@ def mutatePopulation(population, selectionRate, mutationRate):
             population[i] = mutateIndividual(population[i], mutationRate)
 
     return mutatedPopulation
+
+
+def nextGeneration(graph, generation, eliteSize, mutationRate):
+    # Breed and mutate children
+    children = breedPopulation(generation, eliteSize)
+    children = mutatePopulation(children, 0.1, mutationRate)
+
+    # Sum this generation with children
+    generetionSum = generation + children
+
+    # Rank every individual
+    ranked = rankPaths(graph, generetionSum)
+
+    # Select individuals for next generation
+    selected = selection(ranked, eliteSize)
+
+    # Get individual list from index list
+    nextGen = matingPool(generetionSum, selected)
+
+    return nextGen
+
