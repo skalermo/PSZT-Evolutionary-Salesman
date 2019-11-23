@@ -47,13 +47,12 @@ def rankPaths(graph, population):
     return sorted(fitnessResults.items(), key=lambda elem: elem[1], reverse=True)
 
 
-def selection(ranked, eliteSize, selectionSize=0.5):
+def selection(ranked, eliteSize, selectionSize):
     """Select parents for next generation using Elitism and Roulette Wheel Selection"""
-    if not 0 < selectionSize <= 1:
-        raise Exception('Selection size must be in [0 .. 1]')
 
     # Filter out -1 fitness
     # ranked = [x for x in ranked if x[1] > 0]
+    # if selectionSize > len(ranked):
 
     selected = []
 
@@ -68,7 +67,7 @@ def selection(ranked, eliteSize, selectionSize=0.5):
     fitnessProbability = [fit / fitnessSum for fit in fitnessCumSum]
 
     # Roulette wheel selection
-    for x in range(int(len(ranked)*selectionSize) - eliteSize):
+    for x in range(selectionSize - eliteSize):
         pick = random.random()
 
         for i in range(eliteSize, len(ranked)):
@@ -174,7 +173,7 @@ def nextGeneration(graph, generation, eliteSize, mutationRate):
     ranked = rankPaths(graph, generetionSum)
 
     # Select individuals for next generation
-    selected = selection(ranked, eliteSize)
+    selected = selection(ranked, eliteSize, len(generation))
 
     # Get individual list from index list
     nextGen = matingPool(generetionSum, selected)
