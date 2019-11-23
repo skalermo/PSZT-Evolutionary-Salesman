@@ -6,7 +6,7 @@ from sys import stdout
 
 
 def evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate):
-    popSizeRate = 0.5
+    popSizeRate = 0.6
     popSize = int(len(graph.vertices()) * popSizeRate)
     population = initPopulation(popSize, graph.vertices())
 
@@ -32,8 +32,8 @@ if __name__ == '__main__':
     parser.add_argument('-d', type=float, default=1.0, metavar='', help='Density of the graph')
     parser.add_argument('-s', type=float, default=None, metavar='', help='Seed for generator')
     parser.add_argument('-g', type=int, default=50, metavar='', help='Number of generations')
-    parser.add_argument('-e', type=int, default=1, metavar='', help='Number of elite individuals')
-    parser.add_argument('-m', type=float, default=0.01, metavar='', help='Chance of mutation on given gene')
+    parser.add_argument('-e', type=int, default=None, metavar='', help='Number of elite individuals')
+    parser.add_argument('-m', type=float, default=None, metavar='', help='Chance of mutation on given gene')
     parser.add_argument('-i', type=str, metavar='', help='Input file')
     parser.add_argument('-o', type=str, metavar='', help='Output file')
 
@@ -50,8 +50,15 @@ if __name__ == '__main__':
     graph = genGraph(vertexCount, density, costMedian=10, costDeviation=5, seed=seed)
 
     generations = args['g']
+
     eliteSize = args['e']
+    if eliteSize is None:
+        eliteSize = int(vertexCount * 0.3)
+
     mutationRate = args['m']
+    if mutationRate is None:
+        mutationRate = 10.0 / vertexCount
+
     startTime = time()
     try:
         evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate)

@@ -120,14 +120,14 @@ def breedPopulation(matingPool, eliteSize):
     children = []
 
     # add elite to children
-    for i in range(0, eliteSize):
+    for i in range(eliteSize):
         children.append(matingPool[i])
 
     # shuffle mating pool
     random.shuffle(matingPool)
 
     # breed new and add them to children
-    for i in range(0, len(matingPool)):
+    for i in range(len(matingPool)):
         bornChildren = breed(matingPool[i], matingPool[-i-1])
         children.extend(bornChildren)
 
