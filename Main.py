@@ -2,6 +2,7 @@ import argparse
 from time import time
 from Generator import genGraph
 from AiUtils import nextGeneration, initPopulation, calcDistance
+from sys import stdout
 
 
 def evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate):
@@ -11,7 +12,8 @@ def evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate):
 
     for i in range(generations):
         population = nextGeneration(graph, population, eliteSize, mutationRate)
-        print(i, calcDistance(graph, population[0]))
+        stdout.write(u"\u001b[1000D {} iteration:{} cost:{} ".format(str(population[0]), i, calcDistance(graph, population[0])))
+        stdout.flush()
 
     return population[0], calcDistance(graph, population[0])
 
@@ -48,6 +50,7 @@ if __name__ == '__main__':
     except KeyboardInterrupt:
         pass
     finally:
-        print(time() - startTime)
+        end = int(time() - startTime)
+        print("\nTime: {}m {}s".format(int(end / 60), end % 60))
 
 
