@@ -3,7 +3,7 @@ import numpy as np
 
 
 def genPath(cityList):
-    return random.sample(cityList, len(cityList))
+    return [cityList[0]] + random.sample(cityList[1:], len(cityList) - 1)
 
 
 def initPopulation(populationSize, cityList):
@@ -93,22 +93,25 @@ def breed(parent1, parent2):
 
     # randomly select the consecutive genes (chain)
     # by picking the first and last genes
-    geneA = int(random.random() * len(parent1))
-    geneB = int(random.random() * len(parent1))
+    geneA = int(random.random() * (len(parent1) - 1)) + 1
+    geneB = int(random.random() * (len(parent1) - 1)) + 1
 
     startGene = min(geneA, geneB)
     endGene = max(geneA, geneB)
 
     # create chains of selected genes for 2 children
-    chain1 = []
-    chain2 = []
-    for i in range(startGene, endGene+1):
-        chain1.append(parent1[i])
-        chain2.append(parent2[i])
+    chain1 = list(parent1[startGene:endGene+1])
+    chain2 = list(parent2[startGene:endGene+1])
+    # for i in range(startGene, endGene+1):
+    #     chain1.append(parent1[i])
+    #     chain2.append(parent2[i])
+
+    p2w1 = [gene for gene in parent2 if gene not in chain1]
+    p1w2 = [gene for gene in parent1 if gene not in chain2]
 
     # fill the remaining empty slots with genes from another parent
-    child1 = chain1 + [gene for gene in parent2 if gene not in chain1]
-    child2 = chain2 + [gene for gene in parent1 if gene not in chain2]
+    child1 = p2w1[:startGene] + chain1 + p2w1[startGene:]
+    child2 = p1w2[:startGene] + chain2 + p1w2[startGene:]
 
     return child1, child2
 
@@ -140,10 +143,10 @@ def mutateIndividual(individual, mutationRate):
     # Clone list
     mutated = list(individual)
 
-    for i in range(len(individual)):
+    for i in range(1, len(individual)):
         if random.random() < mutationRate:
             # Index of gene to swap
-            j = random.randint(0, len(individual) - 1)
+            j = random.randint(1, len(individual) - 1)
 
             # Swap
             mutated[i], mutated[j] = individual[j], individual[i]
