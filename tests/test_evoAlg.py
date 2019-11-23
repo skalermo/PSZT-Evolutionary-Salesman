@@ -14,7 +14,7 @@ class MyTestCase(unittest.TestCase):
 
         addCheapestCycle(graph, singleTravelCost)
         _, distance = evolutionaryAlgorithm(graph, 1000, 4, 0.1)
-        self.assertTrue(n * singleTravelCost, distance)
+        self.assertEqual(n * singleTravelCost, distance)
 
     def test_addCheapestCycle(self):
         n = 10
