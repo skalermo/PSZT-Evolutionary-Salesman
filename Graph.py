@@ -1,3 +1,5 @@
+import json
+
 
 class WeightedGraph:
     # graph = { 'v1':{'v2': cost, ... } }
@@ -45,3 +47,13 @@ class WeightedGraph:
         for v1 in self.graph.keys():
             for v2 in self.graph[v1].keys():
                 yield (v1, v2, self.graph[v1][v2])
+
+    def dump(self, buffer):
+        json.dump(self.graph, buffer, indent=4)
+
+    @staticmethod
+    def load(filename):
+        with open(filename, 'r') as f:
+            graph = json.load(f)
+            g = WeightedGraph(graph)
+        return g
