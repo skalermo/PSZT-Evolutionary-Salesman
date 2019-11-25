@@ -29,6 +29,16 @@ Pozwala ona na swtorzenie grafu o zadanej liczbie wierzchołków i gęstości.
 Koszty krawędzi są wyliczane na podstawie rozkładu normalnego. Także możliwe jest
 przypisanie wierzchołkom grafu specjalnych nazw podając do funkcji listę stringów.
 
+### Opis algorytmu
+
+1. Generowanie populacji początkowej P
+2. Reprodukcja z par z P zbiór osobników R przez zastosowanie krzyżowania
+ a potem mutacji. Przydział osobników do par jest losowy
+3. Ocenianie osobników populacji P U R, ich posortowanie względem oceny
+i wybór najlepszych metodą elitarną oraz metodą ruletki
+4. Jeśli licznik osiągnął podaną liczbę iteracji koniec. W przeciwnym razie
+wróć do p. 2
+
 ### Osobnik
 
 Osobniki są reprezentowane przez cykle przechodzące
@@ -94,3 +104,5 @@ Przykład:
 
 Funkcja mutująca wybiera osobniki z populacji do zmutowania. Następnie dla każdego wybranego osobnika
 funkcja mutuje osobnik zamieniając geny miejscami.
+
+
