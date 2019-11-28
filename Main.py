@@ -1,6 +1,11 @@
 import argparse
 from time import time
 from sys import stdout
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import numpy as np
+
+
 from Generator import genGraph
 from AiUtils import nextGeneration, initPopulation, calcDistance
 from Graph import WeightedGraph as Graph
@@ -12,21 +17,26 @@ def evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate):
     population = initPopulation(popSize, graph.vertices())
     lastDistance = -1
     lastGeneration = 0
+    progress = []
+    if lastDistance != -1:
+        progress.append(calcDistance(graph, population[0]))
     try:
         for i in range(generations):
             population = nextGeneration(graph, population, eliteSize, mutationRate)
             distance = calcDistance(graph, population[0])
+            if lastDistance != -1:
+                progress.append(calcDistance(graph, population[0]))
 
             if lastDistance != distance:
+                lastDistance = distance
                 print()
 
             stdout.write(u"\u001b[1000DGeneration:{} Distance:{} ".format(i, distance))
             stdout.flush()
 
-            lastDistance = distance
             lastGeneration = i
     finally:
-        return population[0], calcDistance(graph, population[0]), lastGeneration
+        return population[0], progress, lastGeneration
 
 
 if __name__ == '__main__':
@@ -39,6 +49,7 @@ if __name__ == '__main__':
     parser.add_argument('-m', type=float, default=None, metavar='', help='Chance of mutation on given gene')
     parser.add_argument('-i', type=str, metavar='', help='Input file')
     parser.add_argument('-o', type=str, default=None, metavar='', help='Output file')
+    parser.add_argument('-c', action='store_true', default=False, help='Output a chart')
 
     args = vars(parser.parse_args())
     graph = None
@@ -67,14 +78,56 @@ if __name__ == '__main__':
         mutationRate = 10.0 / vertexCount
 
     startTime = time()
-
-    bestPath, bestDistance, lastGeneration = evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate)
-
+    bestPath, progress, lastGeneration = evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate)
     end = int((time() - startTime) * 1000)
+
+    # check if there is any progress at all
+    bestDistance = -1 if len(progress) == 0 else progress[-1]
     print('\nTime: {}m {}s {}ms'.format((end // 60000), (end // 1000) % 60, end % 1000))
     if args['o'] is None:
-        print(str(bestPath) + ' ' + str(bestDistance))
+        if bestDistance == -1:
+            print('No path found')
+            exit()
+        else:
+            print('Last generation: {}, Distance: {}\n'.format(lastGeneration, bestDistance))
+            print('Path: {}, \' {}\' \n'.format(str(bestPath)[1:-1], str(bestPath[0])))
     else:
         with open(args['o'], 'w') as output:
-            output.write('Last generation: {}, Distance: {}\n'.format(lastGeneration, bestDistance))
-            output.write('Path: {}, \' {}\' \n'.format(str(bestPath)[1:-1], str(bestPath[0])))
+            if bestDistance == -1:
+                output.write('No path found')
+                exit()
+            else:
+                output.write('Last generation: {}, Distance: {}\n'.format(lastGeneration, bestDistance))
+                output.write('Path: {}, \' {}\' \n'.format(str(bestPath)[1:-1], str(bestPath[0])))
+
+    if args['c']:
+        # the generation where some progress has appeared
+        firstGoodGeneration = lastGeneration - len(progress)
+
+        fig, ax = plt.subplots()
+        ax.plot(list(range(firstGoodGeneration, len(progress) + firstGoodGeneration)), progress)
+
+        # draw a tick corresponding to the firstGoodGeneration above the chart
+        generationTick = [firstGoodGeneration]
+        ax.xaxis.set_minor_locator(ticker.FixedLocator(generationTick))
+        ax.xaxis.set_minor_formatter(ticker.FixedFormatter(generationTick))
+        ax.tick_params(axis="x", which="minor", direction="out",
+                       top=True, labeltop=True, bottom=False, labelbottom=False)
+
+        # draw a tick corresponding to the the lowest achieved cost
+        costTick = [progress[-1]]
+        ax.yaxis.set_minor_locator(ticker.FixedLocator(costTick))
+        ax.yaxis.set_minor_formatter(ticker.FixedFormatter(costTick))
+        ax.tick_params(axis="y", which="minor", direction="out",
+                       right=True, labelright=True, left=False, labelleft=False)
+
+        ax.set_ylabel('Distance')
+        ax.set_xlabel('Generation')
+
+        # save chart
+        fig.set_size_inches(18, 10, forward=True)
+        fig.set_dpi(100)
+        fig.savefig('chart.png', dpi=100)
+
+        plt.show()
+        plt.close()
