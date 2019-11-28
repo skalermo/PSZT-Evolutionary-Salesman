@@ -26,20 +26,6 @@ class GeneratorTest(unittest.TestCase):
 
         self.assertFalse(any(edge[2] < 1 for edge in g))
 
-    def test_addCitiesNames(self):
-        citiesList = ['Billings',
-                      'Boise',
-                      'Boston',
-                      'Boulder',
-                      'Bridgeport',
-                      'Brownsville',
-                      'Buffalo',
-                      'Burbank',
-                      'New York',
-                      'Columbus']
-        g = genGraph(vertexCount=10, density=0.5, citiesNameList=citiesList)
-        self.assertTrue(all(city in g.vertices() for city in citiesList))
-
     def test_genDifferentGraphs(self):
         g = genGraph(vertexCount=100, density=0.6)
         f = genGraph(vertexCount=100, density=0.6)

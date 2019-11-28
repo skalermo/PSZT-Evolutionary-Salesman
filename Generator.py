@@ -8,7 +8,7 @@ from sys import stdout
 import Graph
 
 
-def genGraph(vertexCount, density, costMedian=100, costDeviation=10, citiesNameList=None, seed=None):
+def genGraph(vertexCount, density, costMedian=100, costDeviation=10, seed=None):
     """Generate weighted graph based on parameters
     :param vertexCount Number of vertices to generate
     :param density Ratio of number of edges in the graph
@@ -33,10 +33,6 @@ to the number of edges in a N complete graph
     # Pick random edges
     edgesWithoutCosts = random.sample([(str(i), str(j),) for i in range(vertexCount - 1)
                                        for j in range(i + 1, vertexCount)], edgeCountToGenerate)
-
-    # Use cities' names instead of numbers
-    if citiesNameList and len(citiesNameList) >= vertexCount:
-        edgesWithoutCosts = [(citiesNameList[i], citiesNameList[j]) for i, j in edgesWithoutCosts]
 
     # Calculate costs from integer normal distribution
     costs = list(np.random.normal(costMedian, costDeviation, edgeCountToGenerate).astype(int))
