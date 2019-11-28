@@ -78,7 +78,7 @@ def selection(ranked, eliteSize, selectionSize):
     return selected
 
 
-def matingPool(population, selectionResults):
+def indexToPopulation(population, selectionResults):
     """Extract population from selectionResults"""
     pool = []
 
@@ -176,7 +176,7 @@ def nextGeneration(graph, generation, eliteSize, mutationRate):
     selected = selection(ranked, eliteSize, len(generation))
 
     # Get individual list from index list
-    nextGen = matingPool(generetionSum, selected)
+    nextGen = indexToPopulation(generetionSum, selected)
 
     return nextGen
 
