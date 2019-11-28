@@ -10,11 +10,10 @@ class MyTestCase(unittest.TestCase):
     def test_evolutionaryAlgorithm(self):
         n = 20
         singleTravelCost = 1
-        graph = genGraph(vertexCount=n, density=1.0)
-
+        graph = genGraph(vertexCount=n, density=1.0, seed=17)
         addCheapestCycle(graph, singleTravelCost)
-        _, distance = evolutionaryAlgorithm(graph, 1000, 4, 0.1)
-        self.assertEqual(n * singleTravelCost, distance)
+        _, progress, _ = evolutionaryAlgorithm(graph, 1000, 4, 0.1)
+        self.assertEqual(n * singleTravelCost, progress[-1])
 
     def test_addCheapestCycle(self):
         n = 10
@@ -28,9 +27,9 @@ class MyTestCase(unittest.TestCase):
 
 def addCheapestCycle(graph, cheapCost):
     n = len(graph.vertices())
-    overwriteEdge(graph, n - 1, 0, cheapCost)
+    overwriteEdge(graph, str(n - 1), str(0), cheapCost)
     for i in range(n-1):
-        overwriteEdge(graph, i, i + 1, cheapCost)
+        overwriteEdge(graph, str(i), str(i + 1), cheapCost)
 
 
 def overwriteEdge(graph, v1, v2, cost):
