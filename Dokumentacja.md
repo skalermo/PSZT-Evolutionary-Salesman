@@ -19,7 +19,7 @@ czym zwraca najlepszy znaleziony wynik lub wiadomość o braku cyklu
 
 ### 3. Podział pracy
 
-Rafał Babiński:
+Rafał Babinski:
 
 - Klasa Graph
 - Selekcja osobników
@@ -28,7 +28,7 @@ Rafał Babiński:
 - Główna pętla algorytmu
 - Wyjście
 
-Roman Moskalenko
+Roman Moskalenko:
 
 - Organizacja projektu
 - Generator grafów
