@@ -42,3 +42,9 @@ Roman Moskalenko:
 Opis znajduje się w pliku Specyfikacja.md
 
 ### 5. 
+| Graf | Wynik | Generacje | Wykres |
+|---|---|---|---|
+|V=10 E=36|58|2000|![Chart10](charts/ch10.png)|
+|V=50 E=980|92|10000|![Chart50](charts/ch50.png)|
+|V=100 E=4455|171|10000|![Chart100](charts/ch100.png)|
+|V=500 E=124750|1006|1000|![Chart500](charts/ch500.png)|
