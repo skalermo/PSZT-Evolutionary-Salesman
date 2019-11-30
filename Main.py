@@ -3,6 +3,7 @@ from time import time
 from sys import stdout
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+from random import seed as setSeed
 import numpy as np
 
 
@@ -57,16 +58,18 @@ if __name__ == '__main__':
         parser.print_help()
         exit(1)
 
+    seed = args['s']
+
     vertexCount = 0
     if args['n']:
         vertexCount = args['n']
         density = args['d']
-        seed = args['s']
         graph = genGraph(vertexCount, density, costMedian=10, costDeviation=5, seed=seed)
 
     if args['i']:
         graph = Graph.load(args['i'])
         vertexCount = len(graph.vertices())
+        setSeed(seed)
 
     generations = args['g']
     eliteSize = args['e']
