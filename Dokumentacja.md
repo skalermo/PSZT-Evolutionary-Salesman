@@ -9,14 +9,11 @@ zaimplementowanymi operacjami krzyżowania i mutacji. Sensownie przedstawić pos
 
 ### 2. Przyjęte założenia, doprecyzowanie treści
 
-- Nie rozróżniamy pojęcia kosztu przejazdu i odległości między miastami
-- Graf wejściowy nie musi być pełny
-- Ponieważ graf wejściowy nie jest pełny cykl łączący wszystkie
-wierzchołki może nie istnieć
-- Graf wejściowy zawiera odległości między miastami
+- Koszt krawędzi jest to odległości między miastami
+- Graf wejściowy musi być pełny
 - Zadaniem algorytmu jest minimalizowanie długości cykli w grafie
 - Algorytm działa określoną liczbę iteracji (tzw. generacji), po
-czym zwraca najlepszy znaleziony wynik lub wiadomość o braku cyklu
+czym zwraca najlepszy znaleziony wynik
 
 ### 3. Podział pracy
 
@@ -57,8 +54,6 @@ Algorytm znajduje coraz lepsze rozwiązania w kolejnych
 generacjach, jednak zbyt mała liczba generacji nie
 gwarantuje znalezienie optymalnego rozwiązania.
 
-W przypadku grafu niepełnego algorytm na początku
-ma problem ze znalezieniem cyklu spełniającego wymagania.
 Możliwym usprawnieniem jest dynamiczne (w czasie działania programu) 
 wybieranie liczby osobników elitarnych i współczynnika mutacji 
 dla sytuacji kiedy algorytm przez dłuższy czas nie może znaleźć lepszego
@@ -69,7 +64,6 @@ rozwiązania.
 Main.py:
 -  `-h`, `--help`  wyświetl pomoc 
 -  `-n`          liczba wierzchołków
--  `-d`          gęstość grafu
 -  `-s`          ustaw seed losowości
 -  `-g`          liczba generacji
 -  `-e`          liczba osobników elitarnych
@@ -81,17 +75,16 @@ Main.py:
 Przykład: wczytaj graf wejściowy z pliku input, szukaj cykli przez 1000 generacji, 
 wyświetl wykres i zapisz wynik do pliku output
  
-    python3 Main.py -i input -g 1000 -o output -c
+    python3 Main.py -i input.json -g 1000 -o output.txt -c
     
 Generator.py
 -  `-h`, `--help`  wyświetl pomoc
 -  `-n`          liczba wierzchołków
--  `-d`          gęstość grafu
 -  `-s`          ustaw seed losowości
 -  `-M`          mediana odległości
 -  `-D`          wariancja odległości
 
-Przykład: wygeneruj graf o liczbie wierzchołków 100, gęstości 0.9, medianie odległości 50,
+Przykład: wygeneruj graf pełny o liczbie wierzchołków 100, medianie odległości 50,
 wariancji odległości 25. Zapisz graf do pliku graph.json
 
-    python3 Generator.py -n 100 -d 0.9 -M 50 -D 25 > graph.json
+    python3 Generator.py -n 100 -M 50 -D 25 > graph.json
