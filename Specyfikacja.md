@@ -25,9 +25,8 @@ self.graph = {
 ### Generowanie grafu
 
 Do generowania grafów służy specjalna funkcja ```genGraph()```.
-Pozwala ona na swtorzenie grafu o zadanej liczbie wierzchołków i gęstości.
-Koszty krawędzi są wyliczane na podstawie rozkładu normalnego. Także możliwe jest
-przypisanie wierzchołkom grafu specjalnych nazw podając do funkcji listę stringów.
+Pozwala ona na swtorzenie grafu o zadanej liczbie wierzchołków.
+Koszty krawędzi są wyliczane na podstawie rozkładu normalnego.
 
 ### Opis algorytmu
 
@@ -51,9 +50,7 @@ Populacja to lista cykli przez wszystkie miasta.
 ### Funkcja przystosowania
 
 Funkcja oceny czy też przystosowania dla każdego osobnika tj. cyklu jest obliczana
-na podstawie odwrotnej proporcjonalności do jego długości (kosztu).
-W przypadku gdy dany osobnik nie jest cyklem Hamiltona funkcja oceny zwraca
--1 co odpowiada minimalnej wartości funkcji przystosowania.
+na podstawie odwrotnej proporcjonalności do jego długości.
 
 ### Selekcja
 

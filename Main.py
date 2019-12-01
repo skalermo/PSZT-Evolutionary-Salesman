@@ -43,9 +43,8 @@ def evolutionaryAlgorithm(graph, generations, eliteSize, mutationRate):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(prog='Main.py', description='Evolutionary algorithm')
     parser.add_argument('-n', type=int, metavar='', help='Number of vertices')
-    parser.add_argument('-d', type=float, default=1.0, metavar='', help='Density of the graph')
     parser.add_argument('-s', type=float, default=None, metavar='', help='Seed for generator')
-    parser.add_argument('-g', type=int, default=50, metavar='', help='Number of generations')
+    parser.add_argument('-g', type=int, default=100, metavar='', help='Number of generations')
     parser.add_argument('-e', type=int, default=None, metavar='', help='Number of elite individuals')
     parser.add_argument('-m', type=float, default=None, metavar='', help='Chance of mutation on given gene')
     parser.add_argument('-i', type=str, metavar='', help='Input file')
@@ -63,8 +62,7 @@ if __name__ == '__main__':
     vertexCount = 0
     if args['n']:
         vertexCount = args['n']
-        density = args['d']
-        graph = genGraph(vertexCount, density, costMedian=10, costDeviation=5, seed=seed)
+        graph = genGraph(vertexCount, costMedian=10, costDeviation=5, seed=seed)
 
     if args['i']:
         graph = Graph.load(args['i'])
