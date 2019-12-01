@@ -8,11 +8,11 @@ from Graph import WeightedGraph
 
 class MyTestCase(unittest.TestCase):
     def test_evolutionaryAlgorithm(self):
-        n = 20
+        n = 10
         singleTravelCost = 1
-        graph = genGraph(vertexCount=n, density=1.0, seed=17)
+        graph = genGraph(vertexCount=n, seed=2)
         addCheapestCycle(graph, singleTravelCost)
-        _, progress, _ = evolutionaryAlgorithm(graph, 1000, 4, 0.1)
+        _, progress, _ = evolutionaryAlgorithm(graph, 2000, 4, 0.1)
         self.assertEqual(n * singleTravelCost, progress[-1])
 
     def test_addCheapestCycle(self):
