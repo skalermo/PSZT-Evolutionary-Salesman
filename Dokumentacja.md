@@ -46,10 +46,10 @@ Opis znajduje się w pliku [Specyfikacja](Specyfikacja.md)
 
 | Graf | Wynik | Generacje | Czas Wykonania | Wykres |
 |---|---|---|---|---|
-|V=10 E=36|58|2000|1s|![Chart10](charts/ch10.png)|
-|V=50 E=980|92|10000|16s|![Chart50](charts/ch50.png)|
-|V=100 E=4455|171|10000|1m 2s|![Chart100](charts/ch100.png)|
-|V=500 E=124750|1006|1000|14m 30s|![Chart500](charts/ch500.png)|
+|V=10|53|2000|1s|![Chart10](charts/ch10.png)|
+|V=50|90|10000|18s|![Chart50](charts/ch50.png)|
+|V=100|121|10000|1m 12s|![Chart100](charts/ch100.png)|
+|V=500|1006|1000|14m 30s|![Chart500](charts/ch500.png)|
 
 ### 6. Wnioski, możliwe usprawnienia
 
